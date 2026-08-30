@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChelleFlix - Ep 19</title>
+    <style>
+        :root {
+            --bg-color: #f3e8ff;
+            --card-bg: #faf5ff;
+            --accent-color: #7e22ce;
+            --accent-hover: #6b21a8;
+            --text-color: #2e1065;
+            --text-subtle: #6b7280;
+            --border-color: #d8b4fe;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(126, 34, 206, 0.15);
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .brand span {
+            color: #581c87;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-subtle);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* Password Section */
+        #password-section {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        #password-section h2 {
+            margin-bottom: 10px;
+            color: #581c87;
+        }
+
+        #password-section p {
+            color: var(--text-subtle);
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            padding: 12px 16px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background: #ffffff;
+            color: #333;
+            width: 80%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            outline: none;
+            text-align: center;
+        }
+
+        input[type="password"]:focus {
+            border-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        .error-msg {
+            color: #dc2626;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Content Section */
+        #content-section {
+            display: none;
+        }
+
+        .header-section {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .ep-badge {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            color: #581c87;
+        }
+
+        .play-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .play-btn:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        /* Photo Gallery Styling */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(126, 34, 206, 0.15);
+        }
+
+        .photo-gallery img.full-width {
+            grid-column: span 2;
+            height: 280px;
+        }
+
+        .content-body p {
+            line-height: 1.6;
+            color: #3b0764;
+            margin-bottom: 16px;
+        }
+
+        .love-footer {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            color: #8b5cf6;
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand">Chelle<span>Flix</span></div>
+        <div class="subtitle">A Special Release · Made For You</div>
+
+        <!-- Password Section -->
+        <div id="password-section">
+            <h2>Welcome Baby</h2>
+            <p>Enter the password to open your message.</p>
+            <form id="pass-form" onsubmit="checkPassword(event)">
+                <input type="password" id="password-input" placeholder="Enter Password" required>
+                <button type="submit" class="submit-btn">Unlock</button>
+            </form>
+            <div id="error-message" class="error-msg">Incorrect password. Please try again!</div>
+        </div>
+
+        <!-- Main Content Section -->
+        <div id="content-section">
+            <div class="header-section">
+                <div class="ep-badge">Ep 19</div>
+                <h1>This Was Never Just 19 Letters</h1>
+                <a class="play-btn" href="https://youtu.be/yXd4YeSLRQM?si=LrbO5cw1WXQhEquo" target="_blank" rel="noopener noreferrer">
+                    ▶ Play Damned - Miguel
+                </a>
+            </div>
+
+            <!-- Embedded Photos (Embedded Base64 Data) -->
+            <div class="photo-gallery">
+                <img src="image.png" alt="Photo 1">
+                <img src="image_2.png" alt="Photo 2">
+                <img src="image_3.png" alt="Photo 3">
+                <img src="image_4.png" alt="Photo 4">
+                <img src="image_5.png" alt="Photo 5" class="full-width">
+            </div>
+
+            <div class="content-body">
+                <p><strong>Kipay,</strong></p>
+
+                <p>If narating mo na to, then you've already reached the end.</p>
+
+                <p>Nineteen letters.</p>
+
+                <p>Nineteen pieces of thoughts, memories, appreciation, and things I wanted to tell you.</p>
+
+                <p>But honestly, hindi lang naman to basta 19 letters because every episode had a different reasons.</p>
+
+                <p>Some were the things na gusto kong sabihin talaga sayo. Some were the memories of us. Some were the things na I appreciate about you. Some were my wishes for you. And some were the reminders na how grateful ako na naging parte ka ng buhay ko.</p>
+
+                <p>Kaya ko naman na magsulat ng one birthday message sayo and tapos na.</p>
+
+                <p>Pero one letter feels like its not enough.</p>
+
+                <p>Maraming bagay na gusto ko naman malaman mo, mga memories na gustong gusto kong alalahanin palagi, and mga little things about you na I want to out into words.</p>
+
+                <p>So, I made nineteen website pages, and each one has a letter inside.</p>
+
+                <p>And maybe hindi pa nga enough yung nineteen eh, kasi paano ko naman mapag kakasya ang mga napagsamahan natin, yung mga memories, yung conversations, laughter, and yung mga little moments natin sa maliliit na pahina.</p>
+
+                <p>Hindi kaya eh.</p>
+
+                <p>But I hope sa lahat ng mga nasabi ko nung previous pages, you were able to see and understand kung ano talaga yung gusto kong sabihin.</p>
+
+                <p>The more I think about it, the more I realize na hindi lang to sa pag susulat ko ng 19 letters.</p>
+
+                <p>It was every thought behind them.</p>
+
+                <p>Lahat ng memories natin na I remember while writing.<br>
+                Lahat ng maliliit na bagay na napapansin ko sayo na gusto kong iput into words.<br>
+                Every moment that made me think na Im grateful to be your cousin.</p>
+
+                <p>But somehow, every letter led back to the same person.</p>
+
+                <p>You.</p>
+
+                <p>Thats why, when you finally reach this final page, I hope you understand na hindi lang ito basta basta birthday letter.</p>
+
+                <p>It was my way of celebrating you.</p>
+
+                <p>Celebrating the person you are, yung mga memories that we made, the bond na nabuo natin, and yung fact na another year of your life that is worth celebrating.</p>
+
+                <p>Your birthday gave me an excuse to finally put all of my thoughts into words.</p>
+
+                <p>Im glad I did.</p>
+
+                <p>Because if hindi ko to nagawa at ginawa, hindi ko sana marerealize na andaming mga bagay yung gusto kong sabihin sayo who means alot to me.</p>
+
+                <p>So as you start another year and chapter of your life, I hope na lagi mong tandaan tong little gift ko para sayo.</p>
+
+                <p>Hindi dahil nineteen letters ito.<br>
+                Hindi dahil nineteen websites ito.</p>
+
+                <p>But because every page was made with you in mind, something that came from me specifically for you.</p>
+
+                <p>So if binalikan mo ulit itong websites na to in the future, I hope you will remember what is the reason behind this.</p>
+
+                <p>You were worth the time and effort!<br>
+                Your birthday was worth making something special for.</p>
+
+                <p>Happy 19th birthday, Chelle!</p>
+
+                <p>I hope this new year of your life will be filled with happiness, laughter, unforgettable memories, new adventures, and everything good that you deserve!</p>
+
+                <p>Thank you for being you, thank you for being someone I could dedicate nineteen letters to.</p>
+
+                <div class="love-footer">ILOVEYOU!💗</div>
+            </div>
+
+            <footer>
+                Made with care · ChelleFlix Special Presentation
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword(event) {
+            event.preventDefault();
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-message');
+            
+            // Password Check ("19")
+            if (input === '19') {
+                document.getElementById('password-section').style.display = 'none';
+                document.getElementById('content-section').style.display = 'block';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
